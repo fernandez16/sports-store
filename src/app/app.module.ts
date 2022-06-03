@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { RestDataSource } from './model/rest.datasource';
 import { CartDetailComponent } from './store/cartDetail.component';
 import { CheckoutComponent } from './store/checkout.component';
 import { StoreComponent } from './store/store.component';
@@ -20,7 +21,7 @@ import { StoreFirstGuard } from './storeFirst.guard';
       { path: '**', redirectTo: '/store' },
     ]),
   ],
-  providers: [StoreFirstGuard],
+  providers: [StoreFirstGuard, RestDataSource],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
