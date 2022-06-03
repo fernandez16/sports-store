@@ -1,0 +1,125 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col bg-dark text-white">
+      <a class="navbar-brand">SPORTS STORE</a>
+    </div>
+  </div>
+
+  <div *ngIf="orderSent" class="m-2 text-center">
+    <h2>Thank You</h2>
+    <p>Thank you for your purchase</p>
+    <button class="btn btn-primary" routerLink="/store">Store</button>
+  </div>
+  <div>
+    <form
+      *ngIf="!orderSent"
+      #form="ngForm"
+      novalidate
+      (ngSubmit)="submitOrder(form)"
+      class="m-2"
+    >
+      <div class="form-group">
+        <label>Name</label>
+        <input
+          class="form-control"
+          #name="ngModel"
+          name="name"
+          [(ngModel)]="order.name"
+          required
+          minlength="3"
+          maxlength="128"
+          pattern="^[a-zA-Z]+$"
+        />
+        <span *ngIf="submitted && name.invalid" class="text-danger"
+          >Please type in your name
+        </span>
+        <!-- <ul
+          class="text- danger-list-unstyled"
+          *ngIf="name.dirty && name.invalid"
+        >
+          <li *ngIf="name.errors.required">Please type in your name</li>
+          <li *ngIf="name.errors.pattern">
+            Please type in your name with letters
+          </li>
+          <li *ngIf="name.errors.minlength">
+            Please type in your name with 3 or more characters
+          </li>
+          <li *ngIf="name.errors.maxlength">
+            Please type in your name with less than 128 characters
+          </li>
+        </ul> -->
+      </div>
+      <div class="form-group">
+        <label>Address</label>
+        <input
+          class="form-control"
+          #name="ngModel"
+          name="address"
+          [(ngModel)]="order.address"
+          required
+        />
+        <span *ngIf="submitted && address.invalid" class="text-danger"
+          >Please type in your address
+        </span>
+      </div>
+      <div class="form-group">
+        <label>City</label>
+        <input
+          class="form-control"
+          #name="ngModel"
+          name="city"
+          [(ngModel)]="order.city"
+          required
+        />
+        <span *ngIf="submitted && city.invalid" class="text-danger"
+          >Please type in your city
+        </span>
+      </div>
+      <div class="form-group">
+        <label>State</label>
+        <input
+          class="form-control"
+          #name="ngModel"
+          name="state"
+          [(ngModel)]="order.state"
+          required
+        />
+        <span *ngIf="submitted && state.invalid" class="text-danger"
+          >Please type in your state
+        </span>
+      </div>
+      <div class="form-group">
+        <label>Zip</label>
+        <input
+          class="form-control"
+          #name="ngModel"
+          name="zip"
+          [(ngModel)]="order.zip"
+          required
+        />
+        <span *ngIf="submitted && zip.invalid" class="text-danger"
+          >Please type in your zip
+        </span>
+      </div>
+      <div class="form-group">
+        <label>Country</label>
+        <input
+          class="form-control"
+          #name="ngModel"
+          name="country"
+          [(ngModel)]="order.country"
+          required
+        />
+        <span *ngIf="submitted && country.invalid" class="text-danger"
+          >Please type in your country
+        </span>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-secondary m-1" routerLink="/cart">Return</button>
+        <button class="btn btn-primary m-1" type="submit">
+          Complete Order
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
