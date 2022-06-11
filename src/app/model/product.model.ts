@@ -1,14 +1,10 @@
 export class Product{
+  public id: number | undefined;
+  public name: string | undefined;
+  public category: string | undefined;
+  public description: string | undefined;
+  public price: number | undefined;
 
-  // Works like a Java POJO
-  // Arguments with public visibility are considered attributes
-  // name? means the attribute is optional
-  constructor(
-    public id?: number,
-    public name?: string,
-    public category?: string,
-    public description?: string,
-    public price?: number
-  ){}
+  constructor() {}
 
 }
