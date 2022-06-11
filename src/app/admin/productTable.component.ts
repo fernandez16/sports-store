@@ -1,18 +1,26 @@
 import { Component } from '@angular/core';
 import { Product } from '../model/product.model';
-import { ProductRepository } from '../model/product.repository';
+import { ServiceService } from '../Service/service.service';
 
 @Component({
   templateUrl: 'productTable.component.html',
 })
 export class ProductTableComponent {
-  constructor(private repository: ProductRepository) {}
+  products: Product[];
 
-  getProducts(): Product[] {
-    return this.repository.getProducts();
+  constructor(private service: ServiceService) {}
+
+  ngOnInit(): void {
+    this.service.getProducts().subscribe((data) => (this.products = data));
   }
 
-  deleteProduct(id: number) {
-    this.repository.deleteProduct(id);
+  getProducts(): Product[] {
+    return this.products;
+  }
+
+  deleteProduct(product: Product) {
+    this.service
+      .deleteProduct(product)
+      .subscribe((data) => (this.products = this.products.filter((p) => p !== product)));
   }
 }

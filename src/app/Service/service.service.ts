@@ -6,7 +6,7 @@ import { Product } from '../model/product.model';
   providedIn: 'root',
 })
 export class ServiceService {
-  Url: string = 'http://localhost:8080/prodocuts';
+  Url: string = 'http://localhost:8080/products';
 
   constructor(private http: HttpClient) {}
 
@@ -14,12 +14,16 @@ export class ServiceService {
     return this.http.get<Product[]>(this.Url);
   }
 
+  getProductById(id: number) {
+    return this.http.get<Product>(this.Url + '/' + id);
+  }
+
   createProduct(product: Product) {
     return this.http.post<Product>(this.Url, product);
   }
 
   updateProduct(product: Product) {
-    return this.http.put<Product>(this.Url + '/' + product.id, product);
+    return this.http.put<Product>(this.Url, product);
   }
 
   deleteProduct(product: Product) {

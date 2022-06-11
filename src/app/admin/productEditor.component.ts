@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from '../model/product.model';
-import { ProductRepository } from '../model/product.repository';
+import { ServiceService } from '../Service/service.service';
 
 @Component({
   templateUrl: 'productEditor.component.html',
@@ -10,23 +9,29 @@ import { ProductRepository } from '../model/product.repository';
 export class ProductEditorComponent {
   editing: boolean = false;
   product: Product = new Product();
+  products: Product[];
 
   constructor(
-    private repository: ProductRepository,
-    private router: Router,
+    private service: ServiceService,
     activeRoute: ActivatedRoute
   ) {
     this.editing = activeRoute.snapshot.params['mode'] == 'edit';
     if (this.editing) {
       Object.assign(
         this.product,
-        repository.getProduct(activeRoute.snapshot.params['id'])
+        service.getProductById(activeRoute.snapshot.params['id'])
       );
     }
   }
 
-  save(form: NgForm) {
-    this.repository.saveProduct(this.product);
-    this.router.navigateByUrl('/admin/main/products');
+  ngOnInit(): void {
+    console.log(this.service.getProductById(activeRoute.snapshot.params['id']))
+    this.service.getProducts().subscribe((data) => (this.products = data));
+  }
+
+  save(product: Product) {
+    this.service.updateProduct(product).subscribe((data) => {
+      product = data;
+    });
   }
 }
